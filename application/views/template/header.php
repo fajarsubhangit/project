@@ -14,7 +14,7 @@
 
   <!-- Datatables -->
   <link rel="stylesheet" href="<?php echo base_url() ?>assets/plugin/datatables/css/dataTables.bootstrap4.min.css">
-  
+
   <title><?php echo $title ?></title>
 </head>
 <body>
@@ -36,8 +36,8 @@
             <i class="fas fa-user-cog"></i> User
           </a>
           <div class="dropdown-menu mt-2" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item bg-primary text-white" href="#"><i class="fas fa-user"></i>&nbsp;Data User</a>
-                      <div class="dropdown-divider"></div>
+            <a class="dropdown-item bg-primary text-white" href="<?php echo base_url() ?>admin/data_user"><i class="fas fa-user"></i>&nbsp;Data User</a>
+            <div class="dropdown-divider"></div>
             <a class="dropdown-item bg-success text-white" href="#"><i class="fas fa-users"></i>&nbsp;Data Referral</a>
           </div>
         </li>

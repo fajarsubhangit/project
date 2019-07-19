@@ -94,8 +94,8 @@
                 </div>
 
                 <!-- Tombol -->
-                <div class="form-group" style="float:right">
-                  <button type="submit" class="btn btn-primary btn-sm">Log in</button>
+                <div class="form-group">
+                  <button type="submit" class="btn btn-primary btn-sm btn-block rounded-pill">Log in</button>
                 </div>
               </form>
             </div>
