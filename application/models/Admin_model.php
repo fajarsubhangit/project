@@ -2,7 +2,7 @@
 class Admin_model extends CI_Model {
   var $tabel_user = "user";
   var $tabel_referral = "referral";
-
+  //DATA USER
   //tampilkan seluruh tabel data user
   public function get_all_user() {
     $this->db->order_by("user_id","desc");
@@ -13,6 +13,17 @@ class Admin_model extends CI_Model {
   public function insertData($data) {
     $this->db->insert($this->tabel_user,$data);
   }
+
+  //ubah data user
+  public function ubah($id,$data) {
+    $this->db->where("user_id",$id);
+    if($this->db->update($this->tabel_user,$data)){
+      return true;
+    };
+  }
+
+
+  //END DATA USER
 
 }
  ?>

@@ -55,7 +55,7 @@
                     </div>
 
                     <!-- password -->
-                    <div class="form-group">
+                    <div class="form-group password">
                       <div class="input-group mb-1" id="password">
                         <div class="input-group-prepend">
                           <span class="input-group-text">

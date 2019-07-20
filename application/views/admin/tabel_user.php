@@ -17,11 +17,11 @@
           <td class="text-center"><?php echo $data->user_hak_akses ?></td>
           <td class="text-center">
             <!-- Edit Data -->
-            <button data-id="<?php echo $data->user_id ?>"  data-toggle="modal" data-target="#exampleModal" class="btn btn-primary btn-sm" id="ubahData" title="Ubah Data">
+            <button data-id="<?php echo $data->user_id ?>"  data-toggle="modal" data-target="#modal" class="btn btn-primary btn-sm" id="ubahData" title="Ubah Data">
               <i class="fas fa-user-edit"></i>
             </button>
             <!-- Ubah Password -->
-            <button data-id="<?php echo $data->user_id ?>"  data-toggle="modal" data-target="#exampleModal" class="btn btn-dark btn-sm" id="ubahPass" title="Ubah Password">
+            <button data-id="<?php echo $data->user_id ?>"  data-toggle="modal" data-target="#modal" class="btn btn-dark btn-sm" id="ubahPass" title="Ubah Password">
               <i class="fas fa-unlock-alt"></i>
             </button>
             <!-- Hapus data -->
