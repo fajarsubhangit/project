@@ -25,18 +25,19 @@ class Auth extends CI_Controller {
       $this->index();
     }
     else {
-      $username = htmlentities(strip_tags(trim($_POST["username"])));
-      $password = htmlentities(strip_tags(trim($_POST["password"])));
+      $username = $this->input->post("username");
+      $password = $this->input->post("password");
 
-      $row  = $this->Auth_model->get_row($username);
+      $query = $this->Auth_model->get_user($username);
+      $row = $query->row();
       $hash = $row->user_password;
 
-      if($username !== $row->user_username) {
-        $this->session->set_flashdata("usernameError","<div class='error'>username tidak benar</div>");
+      if($username !== $row->username) {
+        $this->session->set_flashdata("usernameError","<div class='error'><i class='fas fa-exclamation-triangle'></i> username tidak benar</div>");
         redirect(base_url());
       }
       else if(!password_verify($password,$hash)) {
-        $this->session->set_flashdata("passwordError","<div class='error'>password tidak benar</div>");
+        $this->session->set_flashdata("passwordError","<div class='error'><i class='fas fa-exclamation-triangle'></i> password tidak benar</div>");
         redirect(base_url());
       }
       else {
@@ -52,7 +53,7 @@ class Auth extends CI_Controller {
 
         $session = array (
           "nama"      => $row->user_nama,
-          "username"  => $row->user_username,
+          "username"  => $row->username,
           "hak_akses" => $row->user_hak_akses
         );
 

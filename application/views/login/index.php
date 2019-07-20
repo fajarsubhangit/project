@@ -34,6 +34,11 @@
       box-shadow: 3px 3px 10px rgba(116, 116, 116, 0.67),-3px -3px 10px rgba(116, 116, 116, 0.67);
     }
 
+    .success {
+      border-radius: 5px;
+      border : 5px solid rgb(20, 255, 0);
+    }
+
     body {
       font-family:Source Sans Pro;
     }
@@ -52,16 +57,16 @@
           </div>
           <div class="card bg-light mb-3">
             <div class="card-body">
-              <form method="post" id="form" action="<?php echo base_url() ?>auth/login_proses">
+              <form method="post" id="formLogin" action="<?php echo base_url() ?>auth/login_proses">
                 <!-- Username -->
                 <div class="form-group mt-3">
-                  <div class="input-group input-group-sm mb-1" id="usernameInput">
+                  <div class="input-group input-group-sm mb-1" id="username">
                     <div class="input-group-prepend">
                       <span class="input-group-text">
                         <i class="fas fa-user"></i>
                       </span>
                     </div>
-                    <input type="text" name="username" class="form-control form-control-sm" placeholder="Username" id="username" value="<?php echo get_cookie("username") ?>">
+                    <input type="text" name="username" class="form-control form-control-sm" placeholder="Username" id="usernameLogin" value="<?php echo get_cookie("username") ?>">
                   </div>
                   <div id="usernameError"></div>
                   <?php echo form_error("username") ?>
@@ -70,13 +75,13 @@
 
                 <!-- Password -->
                 <div class="form-group">
-                  <div class="input-group input-group-sm mb-1" id="passwordInput">
+                  <div class="input-group input-group-sm mb-1" id="password">
                     <div class="input-group-prepend">
                       <span class="input-group-text">
                         <i class="fas fa-lock"></i>
                       </span>
                     </div>
-                    <input type="password" name="password" class="form-control form-control-sm" placeholder="Password" id="password" value="<?php echo get_cookie("password") ?>">
+                    <input type="password" name="password" class="form-control form-control-sm" placeholder="Password" id="passwordLogin" value="<?php echo get_cookie("password") ?>">
                   </div>
                   <div id="passwordError"></div>
                   <?php echo form_error("password") ?>
@@ -108,5 +113,7 @@
     <script src="<?php echo base_url() ?>assets/plugin/jquery-3.4.1.min.js"></script>
     <!-- Bootstrap JS -->
     <script src="<?php echo base_url() ?>assets/js/bootstrap.min.js"></script>
+    <!-- External JS -->
+    <script src="<?php echo base_url() ?>assets/js/custom.js"></script>
   </body>
 </html>

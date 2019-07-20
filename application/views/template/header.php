@@ -14,8 +14,30 @@
 
   <!-- Datatables -->
   <link rel="stylesheet" href="<?php echo base_url() ?>assets/plugin/datatables/css/dataTables.bootstrap4.min.css">
+  <!-- Google fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
   <title><?php echo $title ?></title>
+  <style>
+
+  .error {
+    background-color: rgb(255, 33, 33);
+    color: white;
+    border-radius: 5px;
+    padding: 5px;
+    font-weight: bold;
+    font-family: Source Sans Pro;
+  }
+
+  .success {
+    border-radius: 5px;
+    border : 5px solid rgb(20, 255, 0);
+  }
+
+  body {
+    font-family: Source Sans Pro;
+  }
+  </style>
 </head>
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
