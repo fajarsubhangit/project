@@ -60,7 +60,7 @@
           <div class="dropdown-menu mt-2" aria-labelledby="navbarDropdown">
             <a class="dropdown-item bg-primary text-white" href="<?php echo base_url() ?>admin/data_user"><i class="fas fa-user"></i>&nbsp;Data User</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item bg-success text-white" href="#"><i class="fas fa-users"></i>&nbsp;Data Referral</a>
+            <a class="dropdown-item bg-success text-white" href="<?php echo base_url() ?>admin/data_referral"><i class="fas fa-users"></i>&nbsp;Data Referral</a>
           </div>
         </li>
       <?php } ?>

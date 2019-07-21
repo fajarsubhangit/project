@@ -5,6 +5,8 @@ class Admin extends CI_Controller {
 
     //load admin model
     $this->load->model("Admin_model");
+    //load user model
+    $this->load->model("User_model");
     //session berakhir/user tidak boleh masuk kecuali sudah login sebagai admin
     if(!$this->session->userdata("hak_akses")) {
       redirect(base_url());
@@ -13,15 +15,19 @@ class Admin extends CI_Controller {
 
   public function index() {
     $this->data["title"] = "Dashboard Admin";
-
+    //total user
     $this->data["total_user"] = $this->Admin_model->get_total_user();
 
+    //total referral
+    $this->data["total_referral"] = $this->User_model->total_data_referral();
+    
     $this->load->view("admin/index",$this->data);
   }
 
   //view data user
   public function data_user() {
     $this->data["title"] = "Data User";
+
 
     //load data
     $this->data["data_user"] = $this->Admin_model->get_all_user();
@@ -173,6 +179,15 @@ class Admin extends CI_Controller {
     else {
       return false;
     }
+  }
+
+  //MENAMPILKAN DATA REFERRAL
+  public function data_referral() {
+    $this->data["referral"] = $this->User_model->get_all();
+
+    $this->data["title"] = "Data Referral";
+
+    $this->load->view("admin/data_user_referral",$this->data);
   }
 
 }

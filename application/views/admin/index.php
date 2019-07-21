@@ -37,9 +37,11 @@
           <h1 class="card-title display-3 text-center">
             <i class="fas fa-users"></i>
           </h1>
-          <h1 class="card-text text-center">0</h1>
+          <h1 class="card-text text-center">
+            <?php echo $total_referral->num_rows() ?>
+          </h1>
         </div>
-          <a class="card-footer text-center bg-success text-white"  href="<?php echo base_url() ?>admin/data_user_referral">
+          <a class="card-footer text-center bg-success text-white"  href="<?php echo base_url() ?>admin/data_referral">
             <i class="fas fa-search"></i> Lihat Selengkapnya
           </a>
       </div>
