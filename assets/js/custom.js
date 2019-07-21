@@ -30,10 +30,10 @@ $(document).ready(function() {
 
   //Buat validasi dan input data ke ajax /*
   $("#simpan").click(function() {
-    var nama     = $("#namaInput").val().trim();
-    var username = $("#usernameInput").val().trim();
-    var password = $("#passwordInput").val().trim();
-    var hakakses = $("#hakaksesinput").val().trim();
+    var nama     = $("#namaInput").val();
+    var username = $("#usernameInput").val();
+    var password = $("#passwordInput").val();
+    var hakakses = $("#hakaksesinput").val();
 
 
     //nama lengkap
@@ -44,7 +44,6 @@ $(document).ready(function() {
       $("#nama").removeClass("success");
     }
     else {
-      $("#namauserError").removeClass("error");
       $("#nama").removeClass("error");
       $("#nama").addClass("success");
     }
@@ -65,7 +64,6 @@ $(document).ready(function() {
       $("#username").removeClass("success");
     }
     else {
-      $("#usernameError").removeClass("error");
       $("#username").removeClass("error");
       $("#username").addClass("success");
     }
@@ -86,7 +84,6 @@ $(document).ready(function() {
       $("#password").removeClass("success");
     }
     else {
-      $("#passwordError").removeClass("error");
       $("#password").removeClass("error");
       $("#password").addClass("success");
     }
@@ -99,7 +96,6 @@ $(document).ready(function() {
       $("#hakakses").removeClass("success");
     }else {
       $("#hakaksesError").removeClass("error");
-      $("#hakaksespassword").removeClass("error");
       $("#hakakses").addClass("success");
     }
 
@@ -108,7 +104,6 @@ $(document).ready(function() {
       //masukan semua data ke database lewat ajax
       var data = $("#form").serialize();
       console.log(data);
-
       $.ajax({
         url: "tambah_user",
         method: "post",
@@ -116,48 +111,57 @@ $(document).ready(function() {
         data: data,
         beforeSend: function() {
           $("#loading-simpan").show();
+          $("#username").removeClass("success");
+          $("#nama").removeClass("success");
+          $("#password").removeClass("success");
+          $("#hakakses").removeClass("success");
         },
         success: function(response) {
           if(response.status === "berhasil") {
             $("#loading-simpan").hide();
+            $("#view").html(response.tabel);
+            $("#form")[0].reset();
+            $("#modal").hide();
+            $(".modal-backdrop").hide();
+            $("body").removeClass("modal-open");
+            $("#tabel").DataTable();
             Swal.fire({
               type:"success",
               title: "Berhasil",
               text: response.pesan
             })
-            $("#view").html(response.tabel);
-            $("#form")[0].reset();
-            $("#nama,#username,#password,#hakakses").removeClass("success");
-            $("#modal").hide();
-            $(".modal-backdrop").hide();
-            $("body").removeClass("modal-open");
-            $("#tabel").DataTable();
+
+
+            $("#nama").removeClass("success");
+            $("#username").removeClass("success");
+            $("#password").removeClass("success");
+            $("#hakakses").removeClass("success");
           }
           else {
             //validasi form
             if(response.nama !== "") {
-              $("#loading-simpan").hide();
-              $("#namauserError").html("<i class='fas fa-exclamation-triangle'></i> " + response.nama);
+              $("#namauserErrorServer").html("<i class='fas fa-exclamation-triangle'></i> " + response.nama);
               $("#nama").addClass("error");
-              $("#namauserError").addClass("error");
+              $("#namauserErrorServer").addClass("error");
             }
 
             if(response.username !== "") {
-              $("#usernameError").html("<i class='fas fa-exclamation-triangle'></i> " + response.username);
+              $("#usernameErrorServer").html("<i class='fas fa-exclamation-triangle'></i> " + response.username);
+              $("#usernameErrorServer").addClass("error");
               $("#username").addClass("error");
-              $("#usernameError").addClass("error");
             }
 
+
             if(response.password !== "") {
-              $("#passwordError").html("<i class='fas fa-exclamation-triangle'></i> " + response.password);
+              $("#passwordErrorServer").html("<i class='fas fa-exclamation-triangle'></i> " + response.password);
               $("#password").addClass("error");
-              $("#passwordError").addClass("error");
+              $("#passwordErrorServer").addClass("error");
             }
 
             if(response.hak_akses !== "") {
-              $("#hakaksesError").html("<i class='fas fa-exclamation-triangle'></i> " + response.hak_akses);
+              $("#hakaksesErrorServer").html("<i class='fas fa-exclamation-triangle'></i> " + response.hak_akses);
               $("#hakakses").addClass("error");
-              $("#hakaksesError").addClass("error");
+              $("#hakaksesErrorServer").addClass("error");
             }
 
           }
@@ -200,7 +204,7 @@ $(document).ready(function() {
     var hakakses = $("#hakaksesinput").val().trim();
 
     var data = "namauser="+nama+"&username="+username+"&hak_akses="+hakakses;
-    console.log(data);
+
     $.ajax({
       url: "ubah_data/"+id,
       method: "post",
@@ -260,7 +264,7 @@ $(document).ready(function() {
       $("#ubahpassword #passwordError").html("");
       $("#ubahpassword #passwordError").removeClass("error");
       $("#ubahpassword #password").removeClass("error");
-      $("#ubahpassword #password").addClass("success");
+
     }
 
     if($("#ubahpassword #passwordError").html() === "") {
@@ -371,20 +375,28 @@ $(document).ready(function() {
     $("#namauserError").removeClass("error");
     $("#nama").removeClass("error");
     $("#namauserError").html("");
+    $("#namauserErrorServer").html("");
+    $("#namauserErrorServer").removeClass("error");
   })
   //username
   $("#usernameInput").focus(function() {
     $("#usernameError").removeClass("error");
     $("#username").removeClass("error");
     $("#usernameError").html("");
+    $("#usernameErrorServer").html("");
+    $("#usernameErrorServer").removeClass("error");
   })
   //password
   $("#passwordInput").focus(function() {
     $("#passwordError").removeClass("error");
     $("#password").removeClass("error");
     $("#passwordError").html("");
+    $("#passwordErrorServer").html("");
+    $("#passwordErrorServer").removeClass("error");
   })
-  //password
+
+
+  //password ubah modal
   $("#ubahpassword #passwordInput").focus(function() {
     $("#ubahpassword #passwordError").removeClass("error");
     $("#ubahpassword #password").removeClass("error");
@@ -401,6 +413,16 @@ $(document).ready(function() {
 
   //tombol tutup di klik
   $("#ubahpassword #tutup").click(function() {
+    $("#form")[0].reset();
+    $("#usernameError,#namauserError,#passwordError,#hakaksesError").html("");
+    $("#usernameError,#namauserError,#passwordError,#hakaksesError").removeClass("error");
+    $("#nama,#username,#password,#hakakses").removeClass("success");
+    $("#nama,#username,#password,#hakakses").removeClass("error");
+    $("#loading-simpan,#loading-ubah,#loadin-hapus").hide()
+  })
+
+  //tombol tutup di klik
+  $("#tutup").click(function() {
     $("#form")[0].reset();
     $("#usernameError,#namauserError,#passwordError,#hakaksesError").html("");
     $("#usernameError,#namauserError,#passwordError,#hakaksesError").removeClass("error");

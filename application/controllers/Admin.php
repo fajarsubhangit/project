@@ -105,7 +105,7 @@ class Admin extends CI_Controller {
   //ubah password user
   public function ubahPassword($id) {
     $this->form_validation->set_rules("password","password","required|min_length[6]");
-    $this->form_validation->set_message("required","{field} wajib di isi server");
+    $this->form_validation->set_message("required","{field} wajib di isi");
     $this->form_validation->set_message("min_length","{field} minimal 6 karakter");
     if($this->form_validation->run() === true) {
     $password = htmlentities(strip_tags(trim($_POST["password"])));

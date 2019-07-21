@@ -39,6 +39,7 @@
                         <input type="text" id="namaInput" name="namauser" class="form-control" placeholder="nama lengkap">
                       </div>
                       <div id="namauserError"></div>
+                      <div id="namauserErrorServer"></div>
                     </div>
 
                     <!-- username -->
@@ -52,6 +53,7 @@
                         <input type="text" id="usernameInput" name="username" class="form-control" placeholder="username">
                       </div>
                       <div id="usernameError"></div>
+                      <div id="usernameErrorServer"></div>
                     </div>
 
                     <!-- password -->
@@ -70,6 +72,7 @@
                         </div>
                       </div>
                       <div id="passwordError"></div>
+                      <div id="passwordErrorServer"></div>
                     </div>
 
                     <!-- hak akses -->
@@ -82,6 +85,7 @@
                         </select>
                       </div>
                       <div id="hakaksesError"></div>
+                      <div id="hakaksesErrorServer"></div>
                     </div>
                   </form>
                 </div>
