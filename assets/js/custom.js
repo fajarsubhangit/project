@@ -314,6 +314,46 @@ $(document).ready(function() {
     }
   })
 
+  //hapus data user
+  $("#view").on("click","#hapusData",function() {
+
+    Swal.fire({
+      title: "Apakah anda yakin?",
+      text: "Data akan di hapus secara permanen!",
+      type: "warning",
+      showCancelButton:true,
+      confirmButtonColor:"#ff2525",
+      cancelButtonColor: "#5a6268",
+      confirmButtonText: "<i class='fas fa-trash-alt'></i>'",
+      cancelButtonText: "<i class='fas fa-times'></i>"
+    }).then((result) => {
+
+      if(result.value) {
+    id = $(this).data("id");
+    $.ajax({
+      url: "hapusData/"+id,
+      method:"post",
+      dataType: "json",
+      beforeSend: function() {
+        $("#loading-hapus").show();
+      },
+      success: function(msg) {
+        Swal.fire({
+          title: "Berhasil",
+          text: msg.pesan,
+          type: "success"
+        })
+        $("#modal").hide();
+        $(".modal-backdrop").hide();
+        $("body").removeClass("modal-open");
+        $("#view").html(msg.html);
+        $("#tabel").DataTable();
+      }
+      });
+    }
+    })
+  })
+
   //ketika icon view password di klik
   $("#viewPass").click(function() {
     if($("#passwordInput")[0].type === "password") {

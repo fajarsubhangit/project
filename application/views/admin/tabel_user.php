@@ -25,7 +25,7 @@
               <i class="fas fa-unlock-alt"></i>
             </button>
             <!-- Hapus data -->
-            <button data-id="<?php echo $data->user_id ?>"  data-toggle="modal" data-target="#exampleModal" class="btn btn-danger btn-sm" id="hapusTabel" title="Hapus Data">
+            <button data-id="<?php echo $data->user_id ?>"  data-toggle="modal" data-target="#exampleModal" class="btn btn-danger btn-sm"  id="hapusData" title="Hapus Data">
               <i class="fas fa-trash-alt"></i>
             </button>
           </td>

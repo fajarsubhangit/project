@@ -132,6 +132,29 @@ class Admin extends CI_Controller {
     echo json_encode($status,JSON_PRETTY_PRINT);
   }
 
+  //hapus data user
+  public function hapusData($id) {
+    sleep("2");
+    if($this->Admin_model->hapusDataUser($id)) {
+      $this->data["data_user"] = $this->Admin_model->get_all_user();
+      $html = $this->load->view("admin/tabel_user",$this->data,true);
+      $status = array(
+        "status" => "berhasil",
+        "pesan"  => "Data berhasil terhapus!",
+        "html"   => $html
+      );
+
+      echo json_encode($status,JSON_PRETTY_PRINT);
+    }
+  }
+
+  //keluar user admin
+  public function keluaradmin() {
+    $this->session->sess_destroy();
+    redirect(base_url());
+  }
+
+
 
   //validasi untuk form data user
   function validasiUser() {

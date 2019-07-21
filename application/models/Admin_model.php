@@ -35,6 +35,17 @@ class Admin_model extends CI_Model {
     }
   }
 
+  //hapus data
+  public function hapusDataUser($id) {
+    $this->db->where("user_id",$id);
+    if($this->db->delete($this->tabel_user)) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
   //END DATA USER
 
 }

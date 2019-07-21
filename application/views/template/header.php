@@ -70,7 +70,7 @@
           <i class="fas fa-user"></i> Hai, <?php echo $this->session->userdata("nama") ?>
         </a>
         <div class="dropdown-menu mt-2 text-center" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">
+          <a class="dropdown-item" href="<?php echo base_url() ?>admin/keluaradmin">
             <button type="button" class="btn btn-danger" title="Logout">
               <i class="fas fa-sign-out-alt"></i>
             </button>

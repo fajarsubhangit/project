@@ -92,11 +92,6 @@
                   <img src="<?php echo base_url() ?>assets/loading.gif">
                   <strong>Proses Simpan Data.....</strong>
                 </div>
-                <!-- Loading hapus -->
-                <div id="loading-hapus">
-                  <img src="<?php echo base_url() ?>assets/loading.gif">
-                  <strong>Proses Hapus Data.....</strong>
-                </div>
                 <!-- Ubah -->
                 <div id="loading-ubah">
                   <img src="<?php echo base_url() ?>assets/loading.gif">
