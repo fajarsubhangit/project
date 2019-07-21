@@ -46,6 +46,10 @@ class Admin_model extends CI_Model {
     }
   }
 
+  public function get_total_user() {
+    return $this->db->get($this->tabel_user);
+  }
+
   //END DATA USER
 
 }

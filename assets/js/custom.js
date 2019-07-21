@@ -1,7 +1,6 @@
 var id;
 
 $(document).ready(function() {
-  $("#tabel").DataTable();
   //DATA USER START
 
   //hide loading data dan error
@@ -401,7 +400,7 @@ $(document).ready(function() {
 
 
   //tombol tutup di klik
-  $("#tutup").click(function() {
+  $("#ubahpassword #tutup").click(function() {
     $("#form")[0].reset();
     $("#usernameError,#namauserError,#passwordError,#hakaksesError").html("");
     $("#usernameError,#namauserError,#passwordError,#hakaksesError").removeClass("error");

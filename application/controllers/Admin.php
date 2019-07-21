@@ -14,6 +14,8 @@ class Admin extends CI_Controller {
   public function index() {
     $this->data["title"] = "Dashboard Admin";
 
+    $this->data["total_user"] = $this->Admin_model->get_total_user();
+
     $this->load->view("admin/index",$this->data);
   }
 
@@ -102,7 +104,6 @@ class Admin extends CI_Controller {
 
   //ubah password user
   public function ubahPassword($id) {
-    sleep("3");
     $this->form_validation->set_rules("password","password","required|min_length[6]");
     $this->form_validation->set_message("required","{field} wajib di isi server");
     $this->form_validation->set_message("min_length","{field} minimal 6 karakter");
@@ -134,7 +135,6 @@ class Admin extends CI_Controller {
 
   //hapus data user
   public function hapusData($id) {
-    sleep("2");
     if($this->Admin_model->hapusDataUser($id)) {
       $this->data["data_user"] = $this->Admin_model->get_all_user();
       $html = $this->load->view("admin/tabel_user",$this->data,true);

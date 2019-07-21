@@ -20,7 +20,9 @@
           <h1 class="card-title display-3 text-center">
             <i class="fas fa-user"></i>
           </h1>
-          <h1 class="card-text text-center">0</h1>
+          <h1 class="card-text text-center">
+            <?php echo $total_user->num_rows() ?>
+          </h1>
         </div>
           <a class="card-footer text-center bg-primary text-white"  href="<?php echo base_url() ?>admin/data_user">
             <i class="fas fa-search"></i> Lihat Selengkapnya
