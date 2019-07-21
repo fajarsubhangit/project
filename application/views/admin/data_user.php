@@ -29,7 +29,7 @@
                 <div class="col-lg-12">
                   <form method="post" id="form">
                     <!-- nama user -->
-                    <div class="form-group">
+                    <div class="form-group nama">
                       <div class="input-group mb-1" id="nama">
                         <div class="input-group-prepend">
                           <span class="input-group-text">
@@ -42,7 +42,7 @@
                     </div>
 
                     <!-- username -->
-                    <div class="form-group">
+                    <div class="form-group username">
                       <div class="input-group mb-1" id="username">
                         <div class="input-group-prepend">
                           <span class="input-group-text">
@@ -55,7 +55,7 @@
                     </div>
 
                     <!-- password -->
-                    <div class="form-group password">
+                    <div class="form-group">
                       <div class="input-group mb-1" id="password">
                         <div class="input-group-prepend">
                           <span class="input-group-text">
@@ -73,7 +73,7 @@
                     </div>
 
                     <!-- hak akses -->
-                    <div class="form-group">
+                    <div class="form-group hakakses">
                       <div class="input-group mb-1" id="hakakses">
                         <select name="hak_akses" id="hakaksesinput" class="form-control">
                           <option value="">-- Hak Akses --</option>
@@ -102,10 +102,80 @@
                   <img src="<?php echo base_url() ?>assets/loading.gif">
                   <strong>Proses Ubah Data.....</strong>
                 </div>
+                <!-- Ubah Password -->
+                <div id="loading-ubahpass">
+                  <img src="<?php echo base_url() ?>assets/loading.gif">
+                  <strong>Proses Ubah Data Password.....</strong>
+                </div>
                 <!-- Tombol simpan data -->
                 <button type="button" class="btn btn-success" id="simpan">Simpan</button>
                 <!-- Tombol Ubah data -->
                 <button type="button" class="btn btn-primary" id="ubah">Ubah</button>
+                <!-- Tombol ubah password -->
+                <button type="button" class="btn btn-dark" id="ubahPassword">Ubah Password</button>
+                <!-- Tombol tutup -->
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="tutup">Tutup</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal ubah password -->
+        <div class="modal fade" id="ubahpassword" tabindex="-1" role="dialog"  aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="modal-title"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="col-lg-12">
+                  <form method="post" id="form">
+                  <!-- username -->
+                    <div class="form-group username">
+                      <div class="input-group mb-1" id="username">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">
+                            <i class="fas fa-user"></i>
+                          </span>
+                        </div>
+                        <input type="text" id="usernameInput" name="username" class="form-control" placeholder="username">
+                      </div>
+                      <div id="usernameError"></div>
+                    </div>
+
+                    <!-- password -->
+                    <div class="form-group">
+                      <div class="input-group mb-1" id="password">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">
+                            <i class="fas fa-lock"></i>
+                          </span>
+                        </div>
+                        <input type="password" name="password" class="form-control" placeholder="password" id="passwordInput">
+                        <div class="input-group-append" id="viewPass">
+                          <span class="input-group-text" id="view">
+                            <i class="fas fa-eye-slash"></i>
+                          </span>
+                        </div>
+                      </div>
+                      <div id="passwordError"></div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <div class="modal-footer">
+            <!-- Ubah Password -->
+                <div id="loading-ubahpass">
+                  <img src="<?php echo base_url() ?>assets/loading.gif">
+                  <strong>Proses Ubah Data Password.....</strong>
+                </div>
+
+
+                <!-- Tombol ubah password -->
+                <button type="button" class="btn btn-dark" id="ubahPassword">Ubah Password</button>
                 <!-- Tombol tutup -->
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" id="tutup">Tutup</button>
               </div>

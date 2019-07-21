@@ -33,11 +33,11 @@ class Auth extends CI_Controller {
       $hash = $row->user_password;
 
       if($username !== $row->username) {
-        $this->session->set_flashdata("usernameError","<div class='error'><i class='fas fa-exclamation-triangle'></i> username tidak benar</div>");
+        $this->session->set_flashdata("usernameError","<div class='usernameError error'><i class='fas fa-exclamation-triangle'></i> username tidak benar</div>");
         redirect(base_url());
       }
       else if(!password_verify($password,$hash)) {
-        $this->session->set_flashdata("passwordError","<div class='error'><i class='fas fa-exclamation-triangle'></i> password tidak benar</div>");
+        $this->session->set_flashdata("passwordError","<div class='passwordError error'><i class='fas fa-exclamation-triangle'></i> password tidak benar</div>");
         redirect(base_url());
       }
       else {

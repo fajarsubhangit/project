@@ -19,9 +19,21 @@ class Admin_model extends CI_Model {
     $this->db->where("user_id",$id);
     if($this->db->update($this->tabel_user,$data)){
       return true;
-    };
+    }else {
+      return false;
+    }
   }
 
+  //ubah password user
+  public function ubahPassword($id,$data) {
+    $this->db->where("user_id",$id);
+    if($this->db->update($this->tabel_user,$data)) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
 
   //END DATA USER
 

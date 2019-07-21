@@ -73,7 +73,6 @@ class Admin extends CI_Controller {
 
   //ubah data berdasarkan ID
   public function ubah_data($id) {
-    sleep("2");
     $nama      = htmlentities(strip_tags(trim($_POST["namauser"])));
     $username  = htmlentities(strip_tags(trim($_POST["username"])));
     $hak_akses = htmlentities(strip_tags(trim($_POST["hak_akses"])));
@@ -99,7 +98,38 @@ class Admin extends CI_Controller {
     }
       echo json_encode($status,JSON_PRETTY_PRINT);
 
+  }
 
+  //ubah password user
+  public function ubahPassword($id) {
+    sleep("3");
+    $this->form_validation->set_rules("password","password","required|min_length[6]");
+    $this->form_validation->set_message("required","{field} wajib di isi server");
+    $this->form_validation->set_message("min_length","{field} minimal 6 karakter");
+    if($this->form_validation->run() === true) {
+    $password = htmlentities(strip_tags(trim($_POST["password"])));
+    $data = array(
+      "user_password" => password_hash($password,PASSWORD_DEFAULT)
+    );
+  $query = $this->Admin_model->ubahPassword($id,$data);
+  $this->data["data_user"] = $this->Admin_model->get_all_user();
+  $html = $this->load->view("admin/tabel_user",$this->data,true);
+  if($query) {
+    $status = array (
+      "status" => "berhasil",
+      "pesan"  => "Password berhasil di ubah",
+      "html"   => $html
+      );
+    }
+  }
+    else {
+      $password = strip_tags(form_error("password"));
+      $status = array (
+        "status" => "gagal",
+        "error" => $password
+      );
+    }
+    echo json_encode($status,JSON_PRETTY_PRINT);
   }
 
 

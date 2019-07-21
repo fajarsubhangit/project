@@ -2,56 +2,31 @@ var id;
 
 $(document).ready(function() {
   $("#tabel").DataTable();
-
-  // <== LOGIN
-
-  //login validasi
-  $("#formLogin").submit(function(e) {
-    if($("#usernameLogin").val().trim() === "") {
-      $("#usernameError").html("<i class='fas fa-exclamation-triangle'></i> username wajib di isi");
-      $("#usernameError").addClass("error");
-      e.preventDefault();
-    }
-    else {
-      $("#username").addClass("success");
-    }
-
-    if($("#passwordLogin").val().trim() === "") {
-      $("#passwordError").html("<i class='fas fa-exclamation-triangle'></i> password wajib di isi");
-      $("#passwordError").addClass("error");
-      e.preventDefault();
-    }
-    else {
-      $("#password").addClass("success");
-    }
-  })
-
-  $("#usernameLogin").focus(function() {
-    $("#usernameError").html("");
-    $("#usernameError").removeClass("error");
-  })
-
-  $("#passwordLogin").focus(function() {
-    $("#passwordError").html("");
-    $("#passwordError").removeClass("error");
-  })
-
-  // ==> END LOGIN
-
-  // <== DATA USER TAMBAH
+  //DATA USER START
 
   //hide loading data dan error
   $("#loading-simpan,#loading-hapus,#loading-ubah").hide();
 
   //ketika tombol + tambah user
   $("#tambah_user").click(function() {
+    $("#loading-ubahpass").hide();
+    $("#password").show();
+    $("#hakakses").show();
+    $("#nama").show();
+    $("#usernameInput").removeAttr("readonly");
+    $("#username").show();
     //sembunyikan tombol ubah
     $("#ubah").hide();
+    $("#ubahPassword").hide();
     //berikan judul
     $("#modal-title").html("<i class='fas fa-user-plus'></i> TAMBAH USER")
 
+    $("#namauserError").show();
+
     $(".password").show();
     $("#simpan").show();
+
+    $("#form")[0].reset();
   });//TOMBOL #tambah_user close
 
   //Buat validasi dan input data ke ajax /*
@@ -60,6 +35,8 @@ $(document).ready(function() {
     var username = $("#usernameInput").val().trim();
     var password = $("#passwordInput").val().trim();
     var hakakses = $("#hakaksesinput").val().trim();
+
+
     //nama lengkap
     if(nama === "") {
       $("#namauserError").html("<i class='fas fa-exclamation-triangle'></i> nama lengkap wajib di isi");
@@ -103,7 +80,7 @@ $(document).ready(function() {
       $("#password").removeClass("success");
     }
     //password minimal 6 karakter
-    else if(password.length <= 6) {
+    else if(password.length < 6) {
       $("#passwordError").html("<i class='fas fa-exclamation-triangle'></i> password minimal 6 karakter");
       $("#passwordError").addClass("error");
       $("#password").addClass("error");
@@ -160,6 +137,7 @@ $(document).ready(function() {
           else {
             //validasi form
             if(response.nama !== "") {
+              $("#loading-simpan").hide();
               $("#namauserError").html("<i class='fas fa-exclamation-triangle'></i> " + response.nama);
               $("#nama").addClass("error");
               $("#namauserError").addClass("error");
@@ -191,7 +169,6 @@ $(document).ready(function() {
 
   }); //Close #tombol simpan di klik
 
-  // ==> END USER TAMBAH
 
   //ketika tombol ubah di klik
   $("#view").on("click","#ubahData",function() {
@@ -200,6 +177,12 @@ $(document).ready(function() {
     $("#simpan").hide();
     $(".password").hide();
     $("#modal-title").html("<i class='fas fa-user-edit'></i> UBAH DATA USER");
+    $("#loading-ubahpass").hide();
+    $("#ubahPassword").hide();
+    $("#password").hide();
+    $("#username").show();
+    $("#hakakses").show();
+
 
     var tr = $(this).closest("tr");
     var nama = tr.find(".namauser-value").val().trim();
@@ -246,6 +229,91 @@ $(document).ready(function() {
     })
   })
 
+  //ketika tombol ubah password di klik
+  $("#view").on("click","#ubahPass",function() {
+    id = $(this).data("id");
+    var tr = $(this).closest("tr");
+    var username = tr.find(".username-value").val().trim();
+
+    $("#ubahpassword #usernameInput").val(username);
+    $("#ubahpassword #usernameInput").attr("readonly","true");
+
+    $("#ubahpassword #loading-ubahpass").hide();
+    $("#ubahpassword #modal-title").html("<i class='fas fa-unlock-alt'></i> UBAH PASSWORD");
+
+
+  })
+
+  //ketika tombol ubah password
+  $("#ubahpassword #ubahPassword").click(function() {
+  if($("#ubahpassword #passwordInput").val().trim() === "" ) {
+      $("#ubahpassword #passwordError").html("<i class='fas fa-exclamation-triangle'></i> password wajib di isi");
+      $("#ubahpassword #passwordError").addClass("error");
+      $("#ubahpassword #password").addClass("error");
+    }
+    else if($("#ubahpassword #passwordInput").val().trim().length < 6) {
+      $("#ubahpassword #passwordError").html("<i class='fas fa-exclamation-triangle'></i> password minimal 6 karakter");
+      $("#ubahpassword #passwordError").addClass("error");
+      $("#ubahpassword #password").addClass("error");
+      $("#ubahpassword #password").removeClass("success");
+    }
+    else {
+      $("#ubahpassword #passwordError").html("");
+      $("#ubahpassword #passwordError").removeClass("error");
+      $("#ubahpassword #password").removeClass("error");
+      $("#ubahpassword #password").addClass("success");
+    }
+
+    if($("#ubahpassword #passwordError").html() === "") {
+    var data = $("#ubahpassword #passwordInput").val().trim();
+    $.ajax({
+      url: "ubahPassword/"+id,
+      method: "post",
+      dataType: "json",
+      data: "password="+data,
+      beforeSend: function() {
+        $("#ubahpassword #loading-ubahpass").show();
+      },
+      success: function(msg) {
+        if(msg.status === "berhasil") {
+          Swal.fire({
+            type: "success",
+            title: "Berhasil",
+            text: msg.pesan
+          })
+          $("#view").html(msg.tabel);
+          $("#ubahpassword #loading-ubahpass").hide();
+          $("#ubahpassword #form")[0].reset();
+          $("#ubahpassword").hide();
+          $(".modal-backdrop").hide();
+          $("body").removeClass("modal-open");
+          $("#tabel").DataTable();
+          $("#ubahpassword #password").removeClass("success");
+
+        }else if(msg.status === "gagal") {
+          $("#ubahpassword #loading-ubahpass").hide();
+          $("#ubahpassword #passwordError").html("<i class='fas fa-exclamation-triangle'></i> "+msg.error);
+          $("#ubahpassword #passwordError").addClass("error");
+          $("#ubahpassword #password").addClass("error");
+        }
+      }
+    })
+  }
+  })
+
+
+  //ketika icon view password di klik
+  $("#ubahpassword #viewPass").click(function() {
+    if($("#ubahpassword #passwordInput")[0].type === "password") {
+      $("#ubahpassword #passwordInput")[0].type = "text";
+      $("#ubahpassword #viewPass #view").html("<i class='fas fa-eye'></i>");
+    }
+    else {
+      $("#ubahpassword #passwordInput")[0].type = "password";
+      $("#ubahpassword #viewPass #view").html("<i class='fas fa-eye-slash'></i>");
+    }
+  })
+
   //ketika icon view password di klik
   $("#viewPass").click(function() {
     if($("#passwordInput")[0].type === "password") {
@@ -277,12 +345,20 @@ $(document).ready(function() {
     $("#password").removeClass("error");
     $("#passwordError").html("");
   })
+  //password
+  $("#ubahpassword #passwordInput").focus(function() {
+    $("#ubahpassword #passwordError").removeClass("error");
+    $("#ubahpassword #password").removeClass("error");
+    $("#ubahpassword #passwordError").html("");
+  })
   //hak akses
   $("#hakaksesinput").change(function() {
     $("#hakaksesError").removeClass("error");
     $("#hakakses").removeClass("error");
     $("#hakaksesError").html("");
   })
+
+
 
   //tombol tutup di klik
   $("#tutup").click(function() {
@@ -293,5 +369,7 @@ $(document).ready(function() {
     $("#nama,#username,#password,#hakakses").removeClass("error");
     $("#loading-simpan,#loading-ubah,#loadin-hapus").hide()
   })
+
+  // ==> DATA USER CLOSES
 
 })

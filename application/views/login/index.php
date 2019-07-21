@@ -68,7 +68,6 @@
                     </div>
                     <input type="text" name="username" class="form-control form-control-sm" placeholder="Username" id="usernameLogin" value="<?php echo get_cookie("username") ?>">
                   </div>
-                  <div id="usernameError"></div>
                   <?php echo form_error("username") ?>
                   <?php echo $this->session->userdata("usernameError") ?>
                 </div>
@@ -83,7 +82,6 @@
                     </div>
                     <input type="password" name="password" class="form-control form-control-sm" placeholder="Password" id="passwordLogin" value="<?php echo get_cookie("password") ?>">
                   </div>
-                  <div id="passwordError"></div>
                   <?php echo form_error("password") ?>
                   <?php echo $this->session->userdata("passwordError") ?>
                 </div>
