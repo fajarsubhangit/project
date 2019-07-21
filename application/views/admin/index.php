@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-lg-12 mt-3">
       <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>Selamat Datang</strong>, anda telah login sebagai <?php echo $this->session->userdata("hak_akses") ?>
+        <strong>Selamat Datang</strong>, anda telah login sebagai  <strong><?php echo strtoupper($this->session->userdata("hak_akses")) ?></strong>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
