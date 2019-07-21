@@ -43,11 +43,15 @@ $(document).ready(function() {
       $("#nama").addClass("error");
       $("#nama").removeClass("success");
     }
+    else if(/^[A-Za-z ]{1,}$/.test(nama) === false) {
+      $("#namauserError").html("<i class='fas fa-exclamation-triangle'></i> hanya di isi dengan huruf besar maupun kecil");
+      $("#namauserError").addClass("error");
+      $("#nama").addClass("error");
+    }
     else {
       $("#nama").removeClass("error");
       $("#nama").addClass("success");
     }
-
 
     //username
     if(username === "") {
@@ -436,6 +440,127 @@ $(document).ready(function() {
   // =========================================
 
   // START USER HAK AKSES
+  $("#tambah").click(function() {
+    var nama  = $("#namaInput").val().trim();
+    var nohp  = $("#nohpInput").val().trim();
+    var email = $("#emailInput").val().trim();
 
+    //nama
+    if(nama === "") {
+      $("#namaError").html("<i class='fas fa-exclamation-triangle'></i> nama lengkap wajib di isi");
+      $("#namaError").addClass("error");
+      $("#nama").addClass("error");
+      $("#nama").removeClass("success");
+    } else if(/^[A-Za-z ]{1,}$/.test(nama) === false) {
+      $("#namaError").html("<i class='fas fa-exclamation-triangle'></i> hanya di isi dengan huruf besar maupun kecil");
+      $("#namaError").addClass("error");
+      $("#nama").addClass("error");
+      $("#nama").removeClass("success");
+    }
+    else {
+      $("#namaError").removeClass("error");
+      $("#nama").addClass("success");
+    }
+
+    //no hp
+    if(nohp === "") {
+      $("#noHpError").html("<i class='fas fa-exclamation-triangle'></i> nomor handphone wajib di isi");
+      $("#noHpError").addClass("error");
+      $("#nohp").addClass("error");
+      $("#nohp").removeClass("success");
+    } else if(/^\d{1,}$/.test(nohp) === false) {
+      $("#noHpError").html("<i class='fas fa-exclamation-triangle'></i> hanya di isi angka");
+      $("#noHpError").addClass("error");
+      $("#nohp").addClass("error");
+      $("#nohp").removeClass("success");
+    }
+    else {
+      $("#noHpError").removeClass("error");
+      $("#nohp").addClass("success");
+    }
+
+    //email
+    if(email === "") {
+      $("#emailError").html("<i class='fas fa-exclamation-triangle'></i> email wajib di isi");
+      $("#emailError").addClass("error");
+      $("#email").addClass("error");
+      $("#email").removeClass("success");
+    } else if(/^\w{1,}@{1}\w{1,}\.{1}\w{1,}$/.test(email) === false) {
+      $("#emailError").html("<i class='fas fa-exclamation-triangle'></i> format email salah");
+      $("#emailError").addClass("error");
+      $("#email").addClass("error");
+      $("#email").removeClass("success");
+    }
+    else {
+      $("#emailError").removeClass("error");
+      $("#email").addClass("success");
+    }
+
+    if($("#namaError").html() === "" && $("#noHpError").html() === "" && $("#emailError").html() === "") {
+      var data = $("#form").serialize();
+
+      $.ajax({
+        url: "user/tambahData",
+        method: "post",
+        data: data,
+        dataType: "json",
+        beforeSend: function() {
+          $("#loading-simpan").show();
+        },
+        success: function(msg) {
+          if(msg.status === "berhasil") {
+            $("#loading-simpan").hide();
+            Swal.fire({
+              title:"Berhasil",
+              text: msg.pesan,
+              type: "success"
+            })
+            $("#form")[0].reset();
+            $("#nama,#nohp,#email").removeClass("success");
+          }
+          else if(msg.status === "gagal") {
+            $("#loading-simpan").hide();
+            if(msg.nama !== "") {
+              $("#namaError").html(msg.nama);
+              $("#namaError").addClass("error");
+              $("#nama").addClass("error");
+            }
+
+            if(msg.nohp !== "") {
+              $("#noHpError").html(msg.nohp);
+              $("#noHpError").addClass("error");
+              $("#nohp").addClass("error");
+            }
+
+            if(msg.email !== "") {
+              $("#emailError").html(msg.email);
+              $("#emailError").addClass("error");
+              $("#email").addClass("error");
+            }
+
+          }
+        }
+      });
+    }
+
+  })
+
+  //hapus error form data hak akses user
+  $("#namaInput").focus(function() {
+    $("#namaError").html("");
+    $("#namaError").removeClass("error");
+  })
+
+  $("#nohpInput").focus(function() {
+    $("#noHpError").html("");
+    $("#noHpError").removeClass("error");
+    $("#nohp").removeClass("error");
+  })
+
+  $("#emailInput").focus(function() {
+    $("#emailError").html("");
+    $("#emailError").removeClass("error");
+    $("#email").removeClass("error");
+  })
 
 })

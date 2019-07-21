@@ -86,7 +86,7 @@
             <!-- Nama -->
             <div class="col-lg-4 offset-lg-4">
               <div class="form-group">
-                <div class="input-group mb-3" id="nama">
+                <div class="input-group mb-1" id="nama">
                   <div class="input-group-prepend">
                     <span class="input-group-text">
                       <i class="fas fa-address-book"></i>
@@ -95,14 +95,14 @@
                   <input type="text" name="nama" class="form-control" placeholder="Nama Lengkap" id="namaInput">
                 </div>
                 <div id="namaError"></div>
-                <?php echo form_error("nama") ?>
+                <div id="namaErrorServer"></div>
               </div>
             </div>
 
             <!--No hp -->
             <div class="col-lg-4 offset-lg-4">
               <div class="form-group">
-                <div class="input-group mb-3" id="nohp">
+                <div class="input-group mb-1" id="nohp">
                   <div class="input-group-prepend">
                     <span class="input-group-text">
                       <i class="fas fa-phone-alt"></i>
@@ -110,15 +110,15 @@
                   </div>
                   <input type="text" name="nohp" class="form-control" placeholder="Nomor Handphone" id="nohpInput">
                 </div>
-                <div id="namaHpError"></div>
-                <?php echo form_error("nphp") ?>
+                <div id="noHpError"></div>
+                <div id="noHpErrorServer"></div>
               </div>
             </div>
 
             <!-- Email -->
             <div class="col-lg-4 offset-lg-4">
               <div class="form-group">
-                <div class="input-group mb-3" id="email">
+                <div class="input-group mb-1" id="email">
                   <div class="input-group-prepend">
                     <span class="input-group-text">
                       <i class="fas fa-envelope"></i>
@@ -126,12 +126,17 @@
                   </div>
                   <input type="text" name="email" class="form-control" placeholder="Email" id="emailInput">
                 </div>
-                <div id="email"></div>
-                <?php echo form_error("email") ?>
+                <div id="emailError"></div>
+                <div id="emailErrorServer"></div>
               </div>
             </div>
 
             <div class="col-lg-4 offset-lg-4">
+              <!-- Loading Simpan -->
+              <div id="loading-simpan">
+                <img src="<?php echo base_url() ?>assets/loading.gif">
+                <strong>Proses Simpan Data.....</strong>
+              </div>
               <button type="button" id="tambah" class="btn btn-primary btn-lg btn-block">Tambah Data User</button>
             </div>
           </form>
