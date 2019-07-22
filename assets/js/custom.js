@@ -428,8 +428,8 @@ $(document).ready(function() {
   //tombol tutup di klik
   $("#tutup").click(function() {
     $("#form")[0].reset();
-    $("#usernameError,#namauserError,#passwordError,#hakaksesError").html("");
-    $("#usernameError,#namauserError,#passwordError,#hakaksesError").removeClass("error");
+    $("#usernameError,#namauserError,#passwordError,#hakaksesError,#usernameErrorServer").html("");
+    $("#usernameError,#namauserError,#passwordError,#hakaksesError,#usernameErrorServer").removeClass("error");
     $("#nama,#username,#password,#hakakses").removeClass("success");
     $("#nama,#username,#password,#hakakses").removeClass("error");
     $("#loading-simpan,#loading-ubah,#loadin-hapus").hide()
