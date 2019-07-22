@@ -12,6 +12,8 @@
   <link rel="stylesheet" href="<?php echo base_url() ?>assets/fontawesome/css/brands.min.css">
   <link rel="stylesheet" href="<?php echo base_url() ?>assets/fontawesome/css/solid.min.css">
 
+  <link rel="shortcut icon" href="<?php echo base_url() ?>assets/favicon.ico">
+
   <!-- Datatables -->
   <link rel="stylesheet" href="<?php echo base_url() ?>assets/plugin/datatables/css/dataTables.bootstrap4.min.css">
   <!-- Google fonts -->

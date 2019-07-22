@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="<?php echo base_url() ?>assets/fontawesome/css/brands.min.css">
     <link rel="stylesheet" href="<?php echo base_url() ?>assets/fontawesome/css/solid.min.css">
 
+    <link rel="shortcut icon" href="<?php echo base_url() ?>assets/favicon.ico">
     <!-- Google Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
